@@ -1,0 +1,603 @@
+.amap-logo,
+.amap-copyright {
+    display: none !important;
+}
+
+.a-map {
+    position: relative;
+}
+
+.a-map .drag {
+    width: 240px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+}
+
+.a-map .drag .d-search {
+    height: 40px;
+    display: flex;
+}
+
+
+/* 无人机弹窗 */
+
+.a-map .dialog {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translateX(-50%);
+    width: 336px;
+    min-height: 300px;
+    box-shadow: 0vw 0.13vw 0.52vw 0vw rgba(0, 0, 0, 0.26);
+    border-radius: 0.21vw;
+    border: solid 0.05vw #34a1ff;
+    z-index: 100;
+    cursor: default;
+    box-sizing: border-box;
+    background-image: linear-gradient( 90deg, rgba(3, 83, 165, 0.72) 0%, rgba(3, 56, 117, 0.93) 61%, rgba(3, 53, 110, 0.96) 100%);
+}
+
+.a-map .pubWin {
+    visibility: hidden;
+}
+
+.a-map .commonDialog {
+    visibility: hidden;
+}
+
+.a-map .dialog .p-header {
+    height: 50px;
+    padding: 0 30px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: solid 0.05vw #34a1ff;
+}
+
+.a-map .dialog .p-header .icon {
+    width: 28px;
+    height: 23px;
+    background: url("../../img/tips.png") center center no-repeat;
+    background-size: 100% 100%;
+}
+
+.a-map .dialog .p-header .close {
+    width: 20px;
+    height: 20px;
+    background: url("../../img/s-close.png") center center no-repeat;
+    background-size: 100% 100%;
+    cursor: pointer;
+}
+
+.a-map .dialog .p-header .text {
+    flex: 1;
+    color: #03f2fb;
+    text-indent: 20px;
+}
+
+.a-map .commonDialog .common-cont {
+    height: calc(100% - 75px);
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    justify-content: space-around;
+    box-sizing: border-box;
+}
+
+.a-map .commonDialog .common-cont .element>div {
+    margin-bottom: 15px;
+}
+
+.a-map .commonDialog .common-cont span {
+    display: inline-block;
+    width: 50%;
+    font-size: 20px;
+}
+
+.a-map .commonDialog .common-cont .name {
+    width: 40%;
+}
+
+.a-map .commonDialog .common-cont .button {
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    display: block;
+    border: none;
+    font-size: 20px;
+    margin: 0 auto;
+    background: url("../../img/buttonStyle.png") center center no-repeat;
+    background-size: 100% 100%;
+    cursor: pointer;
+}
+
+.a-map .pubWin .p-cont {
+    padding: 15px;
+}
+
+.a-map .pubWin .p-cont .icon {
+    width: 98px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.a-map .pubWin .p-cont .icon .number {
+    line-height: 75px;
+    text-align: center;
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+    background: url("../../img/icon.png") center center no-repeat;
+    background-size: 100% 100%;
+}
+
+.a-map .pubWin .p-cont .icon .title {
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.a-map .pubWin .p-cont .cont-top,
+.a-map .pubWin .p-cont .cont-bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.a-map .monitorDialog {
+    visibility: hidden;
+    width: 700px;
+    height: 500px;
+    box-sizing: content-box;
+    position: relative;
+}
+
+.a-map .monitorDialog .common-cont {
+    height: calc(100% - 130px);
+}
+
+.a-map .monitorDialog .monitor-mark {
+    position: absolute;
+    top: 75px;
+    left: 0;
+    width: 700px;
+    height: calc(100% - 130px);
+    z-index: 1;
+    background: #000000;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.a-map .monitorDialog .monitor-mark span {
+    display: inline-block;
+    font-size: 40px;
+}
+
+.a-map .monitorDialog .common-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 80px;
+}
+
+.a-map .monitorDialog .common-footer .button {
+    width: 140px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    display: block;
+    border: none;
+    font-size: 20px;
+    margin: 0 auto;
+    background: url("../../img/buttonStyle.png") center center no-repeat;
+    background-size: 100% 100%;
+    cursor: pointer;
+}
+
+.d-search .s-input {
+    height: 100%;
+    width: 160px;
+    color: #95cbff;
+    font-size: 16px;
+    border-right: 0;
+    padding-left: 10px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    border: 2px solid rgb(31, 168, 227);
+    background-image: linear-gradient(153deg, #34a1ff 0%, #0f3962 27%, #020626 100%);
+}
+
+.d-search .s-input:focus {
+    outline: none;
+}
+
+.d-search .s-input::-webkit-input-placeholder {
+    color: #95cbff;
+}
+
+.d-search .s-input::-moz-placeholder {
+    color: #95cbff;
+}
+
+.d-search .s-input::-moz-placeholder {
+    color: #95cbff;
+}
+
+.d-search .s-input::-ms-input-placeholder {
+    color: #95cbff;
+}
+
+.d-search .s-icon {
+    cursor: pointer;
+    background: rgb(31, 168, 227);
+    ;
+    border: 2px solid rgb(31, 168, 227);
+    border-left: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.d-search .s-icon .icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url('../../img/s-search.png') center center no-repeat;
+    background-size: 100% 100%;
+}
+
+.d-search .s-icon .text {
+    color: #fff;
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+.d-bayonet {
+    height: 417px;
+    background: url('../../img/tuli.png') center center no-repeat;
+    background-size: 100% 100%;
+    margin-top: 30px;
+    position: relative;
+}
+
+.d-bayonet .close {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url("../../img/s-close.png") center center no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    right: 30px;
+    top: 15px;
+    cursor: pointer;
+}
+
+.d-bayonet .b-content {
+    padding-top: 52px;
+    height: 365px;
+    margin: 0 auto;
+}
+
+.d-bayonet .b-content .item {
+    padding: 0 35px;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    height: 35px;
+    line-height: 35px;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.d-bayonet .b-content .active {
+    background: #1667ba;
+}
+
+.d-bayonet .b-content .selected {
+    background: #1667ba;
+}
+
+.d-bayonet .b-content .item:nth-of-type(1) {
+    margin-top: 15px;
+}
+
+.d-bayonet .b-content .item .icon {
+    width: 20px;
+    height: 27px;
+}
+
+.d-bayonet .b-content .item .person {
+    background: url("../../img/legendList/person.png") center center no-repeat;
+    background-size: 100% 100%;
+}
+
+.d-bayonet .b-content .item .monitor {
+    background: url("../../img/legendList/monitor.png") center center no-repeat;
+    background-size: 100% 100%;
+}
+
+.d-bayonet .b-content .item .inspection {
+    background: url("../../img/legendList/inspection.png") center center no-repeat;
+    background-size: 100% 100%;
+}
+
+.d-bayonet .b-content .item .enclosure {
+    background: url("../../img/legendList/enclosure.png") center center no-repeat;
+    background-size: 100% 100%;
+}
+
+.d-bayonet .b-content .item .vehicle {
+    background: url("../../img/legendList/vehicle.png") center center no-repeat;
+    background-size: 100% 100%;
+}
+
+.d-bayonet .b-content .item .uav {
+    background: url("../../img/legendList/uav.png") center center no-repeat;
+    background-size: 100% 100%;
+}
+
+.d-bayonet .b-content .item .bayonet {
+    background: url("../../img/legendList/bayonet.png") center center no-repeat;
+    background-size: 100% 100%;
+}
+
+.d-bayonet .b-content .item .road {
+    background: url("../../img/legendList/road.png") center center no-repeat;
+    background-size: 100% 100%;
+}
+
+.d-bayonet .b-content .item .area {
+    background: url("../../img/legendList/area.png") center center no-repeat;
+    background-size: 100% 100%;
+}
+
+.d-bayonet .b-content .item .text {
+    flex: 1;
+    text-align: left;
+    text-indent: 20px;
+}
+
+.d-bayonet .b-content .item .arrow {
+    width: 6px;
+    height: 10px;
+    background: url("../../img/legendList/rightArrow.png") center center no-repeat;
+    background-size: 100% 100%;
+}
+
+.d-bayonet .b-submenu {
+    width: auto;
+    height: auto;
+    display: none;
+    position: absolute;
+    max-height: 500px;
+    overflow-y: auto;
+    top: 10px;
+    font-size: 16px;
+    right: -20px;
+    padding: 10px;
+    transform: translateX(100%);
+    background-image: linear-gradient( 90deg, rgba(49, 54, 94, 0.8) 0%, rgba(2, 6, 38, 0.9) 100%);
+}
+
+.d-bayonet .b-submenu::-webkit-scrollbar {
+    width: 5px;
+}
+
+.d-bayonet .b-submenu::-webkit-scrollbar-thumb {
+    background-color: #0f3962;
+}
+
+
+/* 滑块颜色 */
+
+.d-bayonet .b-submenu::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.d-bayonet .sub-item {
+    white-space: nowrap;
+}
+
+.d-bayonet .b-submenu input[type='checkbox'] {
+    margin-right: 5px;
+    width: 15px;
+    height: 15px;
+}
+.d-bayonet .sub-item span{
+   display: inline-block;
+   width: 12px;
+   margin-left: 3px;
+   height: 12px;
+}
+
+
+/*地图marker*/
+
+.mapMarker {
+    position: absolute;
+    top: -28px;
+    left: 10px;
+    perspective: 1000;
+    -webkit-perspective: 1000;
+    transform-style: preserve-3d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mapMarker .mapPoint {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: currentColor;
+    position: relative;
+}
+
+.mapMarker .mapPointCircle {
+    width: 10px;
+    height: 10px;
+    color: #f17b02;
+    position: relative;
+}
+
+.mapMarker .mapPointCircle::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 50%;
+    background-color: currentColor;
+    position: absolute;
+}
+
+.mapMarker .mapPointCircle .pointCircle {
+    width: 100%;
+    height: 100%;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    box-sizing: border-box;
+    position: absolute;
+}
+
+.mapMarker .mapPointCircle .pointCircle:first-child {
+    animation: ripple 2s 1s linear infinite;
+}
+
+.mapMarker .mapPointCircle .pointCircle:last-child {
+    animation: ripple 2s 2s linear infinite;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(2);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+.mapMarker .mapIcon {
+    width: 1.25vw;
+    height: 1.74vw;
+    position: relative;
+    transform-origin: center center;
+}
+
+.mapMarker .mapIcon span {
+    /* static\css\lastScreen\img\mapIcon */
+    width: 42px;
+    height: 56px;
+    background: url("../../img/plane.png") center center no-repeat;
+    background-size: 100% 100%;
+    display: block;
+    border: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+@keyframes pulsate {
+    0% {
+        transform: scale(0.1, 0.1);
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    50% {
+        opacity: 1;
+        filter: none;
+    }
+    100% {
+        transform: scale(1.2, 1.2);
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+}
+
+.point,
+.point::before,
+.point::after {
+    position: absolute;
+    width: 0.313vw;
+    height: 0.313vw;
+    padding: 0.1vw 0.1vw;
+    border-radius: 50%;
+    content: "";
+}
+
+.alarm::before,
+.alarm::after {
+    background: red;
+}
+
+.speed::before,
+.speed::after {
+    background: #ffa600;
+}
+
+.point::before {
+    animation: scale 2s infinite;
+}
+
+.point::after {
+    animation: scale2 2s infinite;
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(1);
+        opacity: 0.9;
+    }
+    100% {
+        transform: scale(6);
+        opacity: 0;
+    }
+}
+
+@keyframes scale2 {
+    0% {
+        transform: scale(1);
+        opacity: 0.9;
+    }
+    100% {
+        transform: scale(12);
+        opacity: 0;
+    }
+}
+
+.ptips {
+    position: absolute;
+    left: -1.5vw;
+    top: -2vw;
+    font-size: 0.8vw;
+    color: #fff;
+    background: red;
+    padding: 0.2vw 0.2vw;
+    display: none;
+}
+
+.amap-logo {
+    display: none!important;
+}
+
+.vjs-live-display {
+    line-height: unset;
+}
+.vjs-slider-horizontal .vjs-volume-level:before{
+    top:-0.7em !important;
+}

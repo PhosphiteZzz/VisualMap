@@ -1,0 +1,1373 @@
+<html>
+
+<head>
+    <c:set var="sessionUrl" value="${pageContext.request.contextPath}" />
+    <meta name="description" content="" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link type="text/css" href="./static/css/utils/easyui.css" rel="stylesheet" />
+    <link type="text/css" href="./static/css/utils/portal.css" rel="stylesheet" />
+    <link type="text/css" href="./static/css/utils/icon.css" rel="stylesheet" />
+    <link type="text/css" href="./static/css/utils/localStyle.css" rel="stylesheet" />
+    <link type="text/css" href="./static/css/utils/iconfont.css" rel="stylesheet">
+    <link type="text/css" href="./static/css/index/Lastcommon.css" rel="stylesheet" />
+    <link type="text/css" href="./static/css/index/Lastindex.css" rel="stylesheet" />
+    <link type="text/css" href="./static/css/index/screenIndexAmap.css" rel="stylesheet" />
+    <link type="text/css" href="./static/css/utils/video-js-cdn.min.css" rel="stylesheet" />
+    <link type="text/css" href="./static/css/utils/jqAlert.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="./static/js/utils/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="./static/js/utils/jquery.easyui.min.1.3.js"></script>
+    <script type="text/javascript" src="./static/js/utils/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="./static/js/utils/jquery.portal.js"></script>
+    <script type="text/javascript" src="./static/js/utils/json2.js"></script>
+    <script type="text/javascript" src="./static/js/utils/plupload.full.min.js"></script>
+    <script type="text/javascript" src="./static/js/utils/common.js"></script>
+    <script type="text/javascript" src="./static/js/utils/orgTree.js"></script>
+    <script type="text/javascript" src="./static/js/utils/jquery.imagesloaded.min.js"></script>
+    <script type="text/javascript" src="./static/js/utils/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="./static/js/utils/echarts.js"></script>
+
+    <!-- <script type="text/javascript" src='./javascript/gis/libs/SuperMap.Include.js'></script> -->
+    <script type="text/javascript" src="./static/js/utils/ckplayer.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./static/js/utils/base.js"></script>
+    <script type="text/javascript" src="./static/js/utils/underscore.js"></script>
+    <script type="text/javascript" src="./static/js/utils/jquery.placeholder.js"></script>
+    <script src="./static/js/utils/jquery.ipaddress.js"></script>
+    <script src="./static/js/utils/sha256.js"></script>
+    <script src="./static/js/utils/shCoreCommon.js"></script>
+    <script src="./static/js/utils/nyAlert.js"></script>
+    <script type="text/javascript" src="./static/js/utils/echarts-liquidfill.js"></script>
+    <script type="text/javascript" src="./static/js/utils/dayjs.js"></script>
+    <script type="text/javascript" src="./static/js/index/screenIndexLast.js"></script>
+    <script type="text/javascript" src="./static/js/index/screen4PathLast.js"></script>
+    <!-- 引入videojs -->
+    <script type="text/javascript" src="./static/js/videoJs/video.core.min.js"></script>
+    <script type="text/javascript" src="./static/js/videoJs/videojs-contrib-hls.min.js"></script>
+    <!-- 引入AMAP -->
+    <!-- 引入道路经纬度 地名 start-->
+    <script type="text/javascript" src="./static/js/amap/roadPath.js"></script>
+    <script type="text/javascript" src="./static/js/amap/roadNameList.js"></script>
+    <!-- 引入道路经纬度 地名 end-->
+
+    <!-- 引入区域地图配置 start-->
+    <script type="text/javascript" src="./static/js/amap/polygonDataList.js"></script>
+    <script type="text/javascript" src="./static/js/amap/polygonRoad.js"></script>
+    <!-- 引入区域地图配置 end-->
+    <script type="text/javascript" src="./static/js/amap/companyNames.js"></script>
+    <script type="text/javascript" src="./static/js/amap/three.js"></script>
+    <script type="text/javascript" src="./static/js/amap/MTLLoader.js"></script>
+    <script type="text/javascript" src="./static/js/amap/LoaderSupport.js"></script>
+    <script type="text/javascript" src="./static/js/amap/OBJLoader2.js"></script>
+    <script type="text/javascript" src="./static/js/modelObj/enclosure/enclosure.js"></script>
+    <script type="text/javascript" src="./static/js/modelObj/enclosure/enclosureType.js"></script>
+    <script type="text/javascript" src="./static/js/amap/loadAMap.js"></script>
+    <script type="text/javascript" src="./static/js/amap/gcoord.js"></script>
+    <script type="text/javascript" src="./static/js/amap/jqAlert.js"></script>
+    <script type="text/javascript" src="./static/js/index/screenIndexUtils.js"></script>
+    <script type="text/javascript" src="./static/js/index/screenIndexAmap.js"></script>
+
+<body>
+    <div class="content">
+        <!--top-->
+        <header>
+            <div>连云港石化基地智慧园区综合管控平台</div>
+            <span id="nowTime"><i>2019年11月5日 星期二 19:48</i></span>
+        </header>
+        <div class="module1">
+            <p class="headSize">危化品车辆管理</p>
+            <ul class="left modLeft">
+                <li>
+                    <div>
+                        <i class="col_eae999"><span id="dangerousCarCompleted">2300</span></i>
+                        <p>危化品资质审核</p>
+                    </div>
+                </li>
+                <li>
+                    <div onclick="carNumDivClickView();">
+                        <i class="col_f87362"><span id="danCarnum">373</span></i>
+                        <p>入园数量</p>
+                    </div>
+                </li>
+                <li>
+                    <div onclick="dangerousDetClickView();">
+                        <i class="col_f8b762"><span id="carjz">295</span></i>
+                        <p>危化品介质</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <i class="col_62bef8"><span id="carPath">99</span></i>
+                        <p>危化品定位视频监控</p>
+                    </div>
+                </li>
+                <li>
+                    <div onclick="carAwayClickView();">
+                        <i class="col_e8f862"><span id="carWarn">0</span></i>
+                        <p>偏离警告</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <i class="">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+                        <p>防疲劳预警</p>
+                    </div>
+                </li>
+            </ul>
+            <div class="right modRight">
+                <article class="c-v-pic-wrap" style="height:100%" id="d_box">
+                    <video id="${id}" class="video-js vjs-default-skin common-video" controls muted></video>
+                </article>
+            </div>
+        </div>
+        <div class="module2">
+            <p class="headSize">卡口管理</p>
+            <ul class="left modLeft">
+                <li>
+                    <div>
+                        <i class="col_eeb649"><span id="bayonet">0</span></i>
+                        <p>卡口监控</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <i class="col_00ffbb"><span id="internalCar">373</span></i>
+                        <p>社会车辆入园次数</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <i class="col_54c9de"><span id="consCar">295</span></i>
+                        <p>施工车辆入园次数</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <i class="col_ee7b49"><span id="visitedNum">5437</span></i>
+                        <p>入园人次</p>
+                    </div>
+                </li>
+                <li>
+                    <div onclick="carOutTimeClickView();">
+                        <i class="col_eeb649"><span id="outWarn">26</span></i>
+                        <p>超时报警</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <i class="">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+                        <p>园区车位预约系统</p>
+                    </div>
+                </li>
+            </ul>
+            <div class="right modRight">
+                <article class="c-v-pic-wrap" style="height:100%" id="b_box">
+
+                </article>
+            </div>
+        </div>
+        <div class="module3" id="GISDIV">
+            <div class="map-right a-map" id="amapContainer">
+                <!-- 图例 -->
+                <div class="drag" id="drag">
+                    <div class="d-search">
+                        <input type="text" placeholder="请输入人员名称" class="s-input">
+                        <span class="s-icon">
+                            <i class="icon"></i>
+                            <span class="text">查询</span>
+                        </span>
+                    </div>
+                    <div class="d-bayonet">
+                        <span class="close"></span>
+                        <div class="b-content">
+
+                        </div>
+                        <!-- 人员二级菜单 -->
+                        <div class="b-submenu" id="company">
+                        </div>
+                        <!-- 监控二级菜单 -->
+                        <div class="b-submenu" id="monitor">
+                        </div>
+                        <!-- 电子巡查二级菜单 -->
+                        <div class="b-submenu" id="inspection">
+                        </div>
+                        <!-- 围网二级菜单 -->
+                        <div class="b-submenu" id="enclosure">
+                        </div>
+
+                        <!-- 危化品二级菜单 -->
+                        <div class="b-submenu" id="vehicle"></div>
+
+                        <!-- 区域二级菜单 -->
+                        <div class="b-submenu" id="area"></div>
+                    </div>
+                </div>
+                <!-- 无人机信息弹窗 -->
+                <div class="pubWin dialog" id="pubWin">
+                    <div class="p-header">
+                        <span class="icon"></span>
+                        <span class="text">无人机信息</span>
+                        <span class="close"></span>
+                    </div>
+                    <div class="p-cont">
+                        <div class="cont-top">
+                            <span class="icon">
+                                <i class="number">0</i>
+                                <i class="title">今日拦截次数</i>
+                            </span>
+                            <span class="icon">
+                                <i class="number">0</i>
+                                <i class="title">今日入侵架次</i>
+                            </span>
+                        </div>
+                        <div class="cont-bottom">
+                            <span class="icon">
+                                <i class="number">0</i>
+                                <i class="title">累计拦截次数</i>
+                            </span>
+                            <span class="icon">
+                                <i class="number">0</i>
+                                <i class="title">累计发行无人机</i>
+                            </span>
+                            <span class="icon">
+                                <i class="number">0</i>
+                                <i class="title">白名单</i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 通用信息弹窗 -->
+                <div class="commonDialog dialog" id="commonDialog">
+                    <div class="p-header">
+                        <span class="icon"></span>
+                        <span class="text">人员详情</span>
+                        <span class="close"></span>
+                    </div>
+                    <div class="common-cont">
+                    </div>
+                </div>
+                <!-- 监控弹窗 -->
+                <div class="monitorDialog dialog" id="monitorDialog">
+                    <div class="p-header">
+                        <span class="icon"></span>
+                        <span class="text">视频1</span>
+                        <span class="close"></span>
+                    </div>
+                    <div class="common-cont">
+
+                    </div>
+                    <div class="monitor-mark">
+                        <span>无信号</span>
+                    </div>
+                    <div class="common-footer" id="common-footer">
+                        <div class="button">点击查看监控</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="module4">
+            <p class="headSize">环境质量</p>
+            <div style="width: 592px;height: 83%;float: left;">
+                <div style="width: 100%;height: 50%;" id="module4Id">
+
+                </div>
+                <div style="height: 8%;">
+                    <div class="textPmClass">PM<sub>2.5</sub>年度目标：<span
+                            class="yearValue"></span>ug/m<sup>3</sup>,截止<span class="dataTime"></span>为：<span
+                            class="nowValue"></span>ug/m<sup>3</sup>
+                    </div>
+                </div>
+                <div style="height: 40%;">
+                    <div class="small_Class">
+                        <div class="small_Class_left">PM<sub>2.5</sub></div>
+                        <div class="small_Class_right">
+                            <span class="pm25Class">42</span>
+                            <span>ug/m<sup>3</sup></span>
+                        </div>
+                    </div>
+                    <div class="small_Class" style="margin-left:1%">
+                        <div class="small_Class_left">PM<sub>10</sub></div>
+                        <div class="small_Class_right">
+                            <span class="pm10Class">23</span>
+                            <span>ug/m<sup>3</sup></span>
+                        </div>
+                    </div>
+                    <div class="small_Class">
+                        <div class="small_Class_left">SO<sub>2</sub></div>
+                        <div class="small_Class_right">
+                            <span class="so2Class">7</span>
+                            <span>ug/m<sup>3</sup></span>
+                        </div>
+                    </div>
+                    <div class="small_Class" style="margin-left:1%">
+                        <div class="small_Class_left">NO<sub>x</sub></div>
+                        <div class="small_Class_right">
+                            <span class="no2Class">34</span>
+                            <span>ug/m<sup>3</sup></span>
+                        </div>
+                    </div>
+                    <div class="small_Class">
+                        <div class="small_Class_left">CO</div>
+                        <div class="small_Class_right">
+                            <span class="coClass">0.6</span>
+                            <span>mg/m<sup>3</sup></span>
+                        </div>
+                    </div>
+                    <div class="small_Class" style="margin-left:1%">
+                        <div class="small_Class_left">O<sub>3</sub></div>
+                        <div class="small_Class_right">
+                            <span class="o3Class">34</span>
+                            <span>ug/m<sup>3</sup></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="width: 592px;height: 83%;float: right;">
+
+                <div style="width: 100%;height: 50%;" id="module4-2Id">
+
+                </div>
+                <div style="height: 8%;">
+
+                </div>
+                <div style="height: 40%;">
+                    <div class="small_Class">
+                        <div class="small_Class_left">COD<sub>mn</sub></div>
+                        <div class="small_Class_right">
+                            <span class="CODmnClass">5.04</span>
+                            <span>mg/L</span>
+                        </div>
+                    </div>
+                    <div class="small_Class" style="margin-left:1%">
+                        <div class="small_Class_left">PH</div>
+                        <div class="small_Class_right">
+                            <span class="PHClass">8.48</span>
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        </div>
+                    </div>
+                    <div class="small_Class">
+                        <div class="small_Class_left">氨氮</div>
+                        <div class="small_Class_right">
+                            <span class="andanClass">0.19</span>
+                            <span>mg/L</span>
+                        </div>
+                    </div>
+                    <!--                <div class="small_Class" style="margin-left:1%">-->
+                    <!--                    <div class="small_Class_left">浑浊度</sub></div>-->
+                    <!--                    <div class="small_Class_right">-->
+                    <!--                        <span class="hunzhuoduClass">34</span>-->
+                    <!--                        <span>NTU</span>-->
+                    <!--                    </div>-->
+                    <!--                </div>-->
+                    <!--					<div class="small_Class" style="margin-left:1%">-->
+                    <!--						<div class="small_Class_left">氯离子</div>-->
+                    <!--						<div class="small_Class_right">-->
+                    <!--							<span class="lvliziClass">34</span>-->
+                    <!--							<span>mg/L</span>-->
+                    <!--						</div>-->
+                    <!--					</div>-->
+                    <div class="small_Class" style="margin-left:1%">
+                        <div class="small_Class_left">总磷</div>
+                        <div class="small_Class_right">
+                            <span class="zonglinClass">0.056</span>
+                            <span>mg/L</span>
+                        </div>
+                    </div>
+                    <div class="small_Class">
+                        <div class="small_Class_left">溶解氧</div>
+                        <div class="small_Class_right">
+                            <span class="rongjieyangClass">13.7</span>
+                            <span>mg/L</span>
+                        </div>
+                    </div>
+
+
+                    <!--	s-->
+                </div>
+
+            </div>
+        </div>
+        <div class="module5">
+            <p class="headSize">污染源排放趋势</p>
+            <div class="module5_left">
+                <p>园区废气排放趋势</p>
+                <div id="my_echarts_left" style="width:100%;height: 100%;"></div>
+            </div>
+            <div class="module5_right">
+                <p>园区废水排放趋势</p>
+                <div id="my_echarts_right" style="width:100%;height: 100%;"></div>
+            </div>
+            <div style="font-size: 24px;height: 20%;">
+                <div style="width: 50%;display: inline-block;">
+                    <div style="display: inline-block;margin-right: 7%;padding-top:30px;width: 40%;">
+                        <span class="yuanSpanClass"></span>
+                        <span style="color: #28bfe7;">大气站点:</span>
+                        <span class="feiqiClass"></span>
+                    </div>
+                    <div style="display: inline-block;padding-top: 30px;width: 40%;">
+                        <span class="yuanSpanClass"></span>
+                        <span style="color: #28bfe7;">水质站点:</span>
+                        <span class="feishuiClass"></span>
+                    </div>
+
+                </div>
+                <div style="display: inline-block;width: 49%;">
+                    <span style="color: #28bfe7;display: inline-block;margin-left: 11%;">站点总数:</span>
+                    <span class="zhandianClass"></span>
+                    <span style="color: #28bfe7;">&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;</span>
+                    <span style="color: #28bfe7;">在线总数:</span>
+                    <span class="zaixianClass"></span>
+                </div>
+            </div>
+        </div>
+        <div class="module6">
+            <p class="headSize">公用工程体系</p>
+            <div class="left modLeftBottom" style="width: 576px;height: 474px;background: white;">
+                <article class="c-v-pic-wrap" style="height:100%" id="h_box">
+                </article>
+            </div>
+            <ul class="right modRightBottom">
+                <li>
+                    <div>
+                        <p>石化管廊</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p>综合管线</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p>公共罐区</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p>危化品停车场</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="module7">
+            <p class="headSize">智慧安监</p>
+            <ul class="left mod5Left">
+                <li onclick="anjianDivClickView();">
+                    <img src="./static/img/icon-36.png" alt="">
+                    <span>智慧安监</span>
+                </li>
+                <li>
+                    <img src="./static/img/icon-39.png" alt="">
+                    <span>园区3D建模</span>
+                </li>
+                <li onclick="xcdwClickView();">
+                    <img src="./static/img/icon-38.png" alt="">
+                    <span>巡查队伍</span>
+                </li>
+                <li onclick="xcluClickView();">
+                    <img src="./static/img/icon-37.png" alt="">
+                    <span>巡查路线</span>
+                </li>
+            </ul>
+            <div class="left" style="width: 22%;height: 72%;">
+                <div style="font-size: 24px;text-align: center;margin-top: 20%;">80.44%</div>
+                <div class="chuguangNei" id="chuguanImg">
+                    <img src="./static/img/nei.png" height="100%" width="100%" />
+                </div>
+                <div class="chuguang">
+                    <img src="./static/img/wai.png" height="100%" width="100%" />
+                </div>
+            </div>
+            <div class="left mod7Right">
+                <ul>
+                    <li class="mod7Right_li">
+                        <div style="display: flex; align-items: center;">
+                            <img src="./static/img/icon-42.png" alt="">
+                            <span onclick="guanziModifyDivClickView();">液位高度</span>
+                        </div>
+                        <i class="col_63b4ff">
+                            <lable id="chu_gd">80.44%</lable>
+                        </i>
+                    </li>
+                    <li class="mod7Right_li">
+                        <div style="display: flex; align-items: center;">
+                            <img src="./static/img/icon-41.png" alt="">
+                            <span>压力</span>
+                        </div>
+                        <i class="col_63b4ff">
+                            <lable id="chu_yl">101.75Kpa</lable>
+                        </i>
+                    </li>
+                    <li class="mod7Right_li">
+                        <div style="display: flex; align-items: center;">
+                            <img src="./static/img/icon-40.png" alt="">
+                            <span>温度</span>
+                        </div>
+                        <i class="col_63b4ff">
+                            <lable id="chu_wd">23.29℃</lable>
+                        </i>
+                    </li>
+                    <li class="mod7Right_li">
+                        <div style="display: flex; align-items: center;">
+                            <img src="./static/img/icon-43.png" alt="">
+                            <span>可燃气体</span>
+                        </div>
+                        <i class="col_63b4ff">
+                            <lable id="chu_ydqt" style="color:#ad5b58">0.00LEL</lable>
+                        </i>
+                    </li>
+                </ul>
+                <div class="selectClass" style="margin-top: 10%;">
+                    <i>储罐位置</i>
+                    <select id="companySelect" onchange="setChuGuanSelect();">
+                        <option value="1">虹港石化</option>
+                        <option value="2">斯尔邦石化</option>
+                        <option value="3">荣泰仓储</option>
+                    </select>
+                </div>
+                <div class="selectClass">
+                    <i>储罐名称</i>
+                    <select id="chuguanSelect" onchange="chuguanSet();">
+                        <option value="1">PX储罐03-T11A</option>
+                        <option value="2">PX储罐03-T11B</option>
+                        <option value="3">醋酸A储罐</option>
+                        <option value="4">醋酸B储罐</option>
+                        <option value="5">NBA罐区A储罐</option>
+                        <option value="6">NBA罐区B储罐</option>
+                        <option value="7">甲醇罐区A储罐</option>
+                        <option value="8">甲醇罐区B储罐</option>
+                        <option value="9">碱液储罐</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="module8">
+            <p class="headSize">河流水质实时数据</p>
+            <div class="headTitleClass">
+                <span class="col col1">监测水域</span>
+                <span class="col col2">断面名称</span>
+                <span class="col col3">COD<sub>mn</sub></span>
+                <span class="col col4">氨氮</span>
+                <span class="col col5">总磷</span>
+                <span class="col col6">总氮</span>
+            </div>
+            <div class="marquee-view">
+                <div class="marquee">
+                </div>
+            </div>
+        </div>
+        <div class="module9">
+            <p class="headSize">
+                <lable onclick="guanliDivClickView();">危险废物动态流转</lable>
+            </p>
+            <div id="my_echarts" style="width: 100%;height:80%;"></div>
+        </div>
+        <!--<div class="popup" style="display:block;">
+<div class="pop_head"><i class="left">超时报警</i><i class="close right">×</i></div>
+<iframe allowtransparency="true" frameborder="0" width="1075" height="196" scrolling="no" src="//tianqi.2345.com/plugin/widget/index.htm?s=1&z=1&t=0&v=0&d=5&bd=0&k=&f=800040&ltf=009944&htf=cc0000&q=1&e=0&a=1&c=54511&w=1075&h=196&align=left"></iframe>
+</div>   -->
+        <!-- ----巡查队伍---- -->
+        <div class="popupTitlexcdw" style="display:none;" id="xcdwDiv">
+            <div class="popTitlexcdw_head"><i class="left">巡查队伍</i><i class="close right"
+                    onclick="xcdwClickClose();">x</i>
+            </div>
+            <div class="prowled-cont" onclick="xcdwInfoClickClose();">
+                <img src="./static/img/xc2.png" style="width:100%;height: 99.5%;">
+            </div>
+            <div id="teamJiaojin" class="prowled-header-jiaojin" onclick="setTeamText(1);">
+                <span>交警大队</span>
+            </div>
+
+            <div id="teamfangy1" class="prowled-header-fangy1" onclick="setTeamText(7);">
+                <span>方洋集团</span>
+            </div>
+            <div id="teamshih1" class="prowled-header-shih1" onclick="setTeamText(5);">
+                <span>石化公司</span>
+            </div>
+
+            <div id="teamchengguan" class="prowled-header-chengguan" onclick="setTeamText(2);">
+                <span>城管大队</span>
+            </div>
+            <div id="teamguihua" class="prowled-header-guihua" onclick="setTeamText(6);">
+                <span>规划建设局</span>
+            </div>
+
+            <div id="teamfangy2" class="prowled-header-fangy2" onclick="setTeamText(7);">
+                <span>方洋集团</span>
+            </div>
+            <div id="teamshih2" class="prowled-header-shih2" onclick="setTeamText(5);">
+                <span>石化公司</span>
+            </div>
+
+            <div id="teamhuangbao" class="prowled-header-huangbao" onclick="setTeamText(4);">
+                <span>环境保护局</span>
+            </div>
+            <div id="teamgongan" class="prowled-header-gongan" onclick="setTeamText(3);">
+                <span>公安分局</span>
+            </div>
+            <div id="team186" class="prowled-header-186" onclick="setTeamText(8);">
+                <span>"186"大队</span>
+            </div>
+            <!-- -----add 巡查队伍内容--- -->
+            <div class="car-det-new" id="car-det-new">
+                <span id="teanmName"></span><br>
+                <span id="teanmText"></span>
+                <br /><br /><span id="teanmNameInfo">队伍人员信息：</span><br>
+                <table border="0" style="width: 100%;color: #fff;font-size: 15px;">
+                    <tbody id="detail-tb-teamName">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="popupTitle" style="display:none;" id="yuancailiaoDiv">
+            <div class="popTitle_head"><i class="left">原材料及成品库内容修改</i><i class="close right"
+                    onclick="yuancailiaoClickClose();">x</i></div>
+            <table style="position: absolute;top: 10%;">
+                <tr>
+                    <td>仓库</td>
+                    <td>
+                        <lable>原材料</lable>
+                    </td>
+                    <td>
+                        <lable>成品库</lable>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1号仓库</td>
+                    <td><input type="text" id="yuan1" value="40" /></td>
+                    <td><input type="text" id="cheng1" value="40" /></td>
+                </tr>
+
+                <tr>
+                    <td>2号仓库</td>
+                    <td><input type="text" id="yuan2" value="30" /></td>
+                    <td><input type="text" id="cheng2" value="30" /></td>
+                </tr>
+
+                <tr>
+                    <td>3号仓库</td>
+                    <td><input type="text" id="yuan3" value="45" /></td>
+                    <td><input type="text" id="cheng3" value="45" /></td>
+                </tr>
+
+                <tr>
+                    <td>4号仓库</td>
+                    <td><input type="text" id="yuan4" value="70" /></td>
+                    <td><input type="text" id="cheng4" value="70" /></td>
+                </tr>
+
+                <tr>
+                    <td>5号仓库</td>
+                    <td><input type="text" id="yuan5" value="20" /></td>
+                    <td><input type="text" id="cheng5" value="20" /></td>
+                </tr>
+
+                <tr>
+                    <td>6号仓库</td>
+                    <td><input type="text" id="yuan6" value="46" /></td>
+                    <td><input type="text" id="cheng6" value="46" /></td>
+                </tr>
+            </table>
+            <br>
+            <div style="position: absolute;top: 80%;left: 58%;font-size: 40px;">
+                <lable onclick="yuancailiaoClickSet();">确定</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <lable onclick="yuancailiaoClickClose();">取消</lable>
+            </div>
+        </div>
+
+        <div class="popupTitleGuanlli" style="display:none;" id="guanliDiv">
+            <div class="popTitleGuanlli_head"><i class="left">生产总值及能耗内容修改</i><i class="close right"
+                    onclick="guanliDivClickClose();">x</i></div>
+            <table style="position: absolute;top: 10%;">
+                <tr>
+                    <td>
+                        <lable>年份</lable>
+                    </td>
+                    <td>
+                        <lable>生产总值(亿元)</lable>
+                    </td>
+                    <td>
+                        <lable>综合能耗(万吨标煤)</lable>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="guanliYear1" value="2013" /></td>
+                    <td><input type="text" id="guanlizhi11" /></td>
+                    <td><input type="text" id="guanlizhi12" /></td>
+                </tr>
+
+                <tr>
+                    <td><input type="text" id="guanliYear2" value="2014" /></td>
+                    <td><input type="text" id="guanlizhi21" /></td>
+                    <td><input type="text" id="guanlizhi22" /></td>
+                </tr>
+
+                <tr>
+                    <td><input type="text" id="guanliYear3" value="2015" /></td>
+                    <td><input type="text" id="guanlizhi31" /></td>
+                    <td><input type="text" id="guanlizhi32" /></td>
+                </tr>
+
+                <tr>
+                    <td><input type="text" id="guanliYear4" value="2016" /></td>
+                    <td><input type="text" id="guanlizhi41" /></td>
+                    <td><input type="text" id="guanlizhi42" /></td>
+                </tr>
+
+                <tr>
+                    <td><input type="text" id="guanliYear5" value="2017" /></td>
+                    <td><input type="text" id="guanlizhi51" /></td>
+                    <td><input type="text" id="guanlizhi52" /></td>
+                </tr>
+
+                <tr>
+                    <td><input type="text" id="guanliYear6" value="2018" /></td>
+                    <td><input type="text" id="guanlizhi61" /></td>
+                    <td><input type="text" id="guanlizhi62" /></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="guanliYear7" value="2019" /></td>
+                    <td><input type="text" id="guanlizhi71" /></td>
+                    <td><input type="text" id="guanlizhi72" /></td>
+                </tr>
+            </table>
+            <br>
+            <div style="position: absolute;top: 80%;left: 58%;font-size: 40px;">
+                <lable onclick="guanliDivClickSet();">确定</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <lable onclick="guanliDivClickClose();">取消</lable>
+            </div>
+        </div>
+
+        <div class="popupTitleAnjian" style="display:none;" id="anjianDiv">
+            <div class="popTitleAnjian_head"><i class="left">智慧安监</i><i class="close right"
+                    onclick="anjianDivClickClose();">x</i></div>
+        </div>
+
+        <div class="anjianCss" id="anjianDivLink">
+            <!-- <iframe src="http://218.92.104.98:10017/bigScreen/index.html#" frameborder="0" scrolling="yes" height="100%" width="100%" ></iframe>-->
+        </div>
+
+        <!-- ----巡查路线---- -->
+        <div class="popupTitlexcxl" style="display:none;" id="xcluDivView">
+            <div class="popTitlexcxl_head"><i class="left">巡查路线</i><i class="close right"
+                    onclick="xcluClickClose();">x</i>
+            </div>
+            <div class="mapProwled-left">
+                <table border="0"
+                    style="width: 100%;color: #fff;font-size: 15px;text-align: center;border-collapse: collapse;">
+                    <thead>
+                        <th>巡查人员</th>
+                        <th>开始时间</th>
+                        <th>结束时间</th>
+                    </thead>
+                    <tbody id="prowledPerson-tb">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="mapProwled-right" id="prowled-map">
+            </div>
+        </div>
+        <!-- ----点击车辆管理弹出的菜单----- -->
+        <div class="popupTitleDanNum" style="display:none;" id="carNumDiv">
+            <div class="popTitleDanNum_head"><i class="left">危化品车辆详情</i><i class="close right"
+                    onclick="carNumDivClickClose();">x</i></div>
+            <div style="position: absolute; width: 97%; height: calc(100% - 12.8%); overflow: auto;left: 1.5%; ">
+                <table border="0" style="width: 100%;color: #fff;font-size: 15px;text-align: center;">
+                    <thead style="">
+                        <th>车牌号</th>
+                        <th>入园时间</th>
+                        <th>访问企业</th>
+                        <th>驾驶人姓名</th>
+                        <th>联系电话</th>
+                        <th>卡口</th>
+                    </thead>
+                    <tbody id="carnum-tb">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ----车辆介质-------- -->
+        <div class="popupTitleDanNum" style="display:none;" id="dangerous-det">
+            <div class="popTitleDanNum_head"><i class="left">危化品介质</i><i class="close right"
+                    onclick="dangerousDetClickClose();">x</i></div>
+            <div style="position: absolute; width: 97%; height: calc(100% - 12.8%); overflow: auto;left: 1.5%; ">
+                <table border="0"
+                    style="width: 100%;color: #fff;font-size: 15px;text-align: center;border-collapse: collapse;">
+                    <thead>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </thead>
+                    <tbody id="dangerous-tb">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ----车辆偏离告警-------- -->
+        <div class="popupTitleDanNum" style="display:none;" id="carAway">
+            <div class="popTitleDanNum_head"><i class="left">车辆偏离告警</i><i class="close right"
+                    onclick="carAwayClickClose();">x</i></div>
+            <div style="position: absolute; width: 97%; height: calc(100% - 12.8%); overflow: auto;left: 1.5%; ">
+                <table border="0" style="width: 100%;color: #fff;font-size: 15px;text-align: center">
+                    <thead>
+                        <th>车牌号</th>
+                        <th>访问企业</th>
+                        <th>驾驶人姓名</th>
+                        <th>联系电话</th>
+                    </thead>
+                    <tbody id="caraway-tb">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ----车辆超时告警-------- -->
+        <div class="popupTitleDanNum" style="display:none;" id="car-outTime">
+            <div class="popTitleDanNum_head"><i class="left">车辆超时告警</i><i class="close right"
+                    onclick="carOutTimeyClickClose();">x</i></div>
+            <div style="position: absolute; width: 97%; height: calc(100% - 12.8%); overflow: auto;left: 1.5%; ">
+                <table border="0" style="width: 100%;color: #fff;font-size: 15px;">
+                    <thead>
+                        <th>车牌号</th>
+                        <th>访问企业</th>
+                        <th>规定出园时间</th>
+                        <th>驾驶人</th>
+                        <th>联系电话</th>
+                    </thead>
+                    <tbody id="warn-tab">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="car-det" id="car-det">
+            <table border="0" style="width: 100%;color: #fff;font-size: 15px;">
+                <tbody id="detail-tb">
+                </tbody>
+            </table>
+            <div class="closeButton" onclick="closeDiv()" style="cursor: pointer;">X</div>
+        </div>
+
+        <!-- ----生态环保体系内容修改-------- -->
+        <div class="popupTitle" style="display:none;" id="huanbaoDiv">
+            <div class="popTitle_head"><i class="left">生态环保体系内容修改</i><i class="close right"
+                    onclick="huanbaoDivClickClose();">x</i></div>
+            <table style="position: absolute;top: 10%;">
+                <tr>
+                    <td>AQI<input type="text" id="aqiValue" size="10" value="27" /></td>
+                    <td>PM2.5<input type="text" id="pmValue" size="10" value="21" /></td>
+                    <td>水滴百分比<input type="text" id="shuidiValue" size="10" value="0.82" /><input type="text"
+                            id="shuidiValue1" size="10" value="0.68" /></td>
+                </tr>
+            </table>
+            <table style="position: absolute;top: 20%;">
+                <tr>
+                    <td colspan="3">30天空气质量达标率</td>
+                </tr>
+                <tr>
+                    <td>01:<input type="text" id="kongqi1" size="10" /></td>
+                    <td>02:<input type="text" id="kongqi2" size="10" /></td>
+                    <td>03:<input type="text" id="kongqi3" size="10" /></td>
+                </tr>
+                <tr>
+                    <td>04:<input type="text" id="kongqi4" size="10" /></td>
+                    <td>05:<input type="text" id="kongqi5" size="10" /></td>
+                    <td>06:<input type="text" id="kongqi6" size="10" /></td>
+                </tr>
+                <tr>
+                    <td>07:<input type="text" id="kongqi7" size="10" /></td>
+                    <td>08:<input type="text" id="kongqi8" size="10" /></td>
+                    <td>09:<input type="text" id="kongqi9" size="10" /></td>
+                </tr>
+                <tr>
+                    <td>10:<input type="text" id="kongqi10" size="10" /></td>
+                    <td>11:<input type="text" id="kongqi11" size="10" /></td>
+                    <td>12:<input type="text" id="kongqi12" size="10" /></td>
+                </tr>
+                <tr>
+                    <td>13:<input type="text" id="kongqi13" size="10" /></td>
+                    <td>14:<input type="text" id="kongqi14" size="10" /></td>
+                    <td>15:<input type="text" id="kongqi15" size="10" /></td>
+                </tr>
+                <tr>
+                    <td>16:<input type="text" id="kongqi16" size="10" /></td>
+                    <td>17:<input type="text" id="kongqi17" size="10" /></td>
+                    <td>18:<input type="text" id="kongqi18" size="10" /></td>
+                </tr>
+                <tr>
+                    <td>19:<input type="text" id="kongqi19" size="10" /></td>
+                    <td>20:<input type="text" id="kongqi20" size="10" /></td>
+                    <td>21:<input type="text" id="kongqi21" size="10" /></td>
+                </tr>
+                <tr>
+                    <td>22:<input type="text" id="kongqi22" size="10" /></td>
+                    <td>23:<input type="text" id="kongqi23" size="10" /></td>
+                    <td>24:<input type="text" id="kongqi24" size="10" /></td>
+                </tr>
+                <tr>
+                    <td>25:<input type="text" id="kongqi25" size="10" /></td>
+                    <td>26:<input type="text" id="kongqi26" size="10" /></td>
+                    <td>27:<input type="text" id="kongqi27" size="10" /></td>
+                </tr>
+                <tr>
+                    <td>28:<input type="text" id="kongqi28" size="10" /></td>
+                    <td>29:<input type="text" id="kongqi28" size="10" /></td>
+                    <td>30:<input type="text" id="kongqi29" size="10" /></td>
+                </tr>
+            </table>
+            <br>
+            <div style="position: absolute;top: 80%;left: 58%;font-size: 40px;">
+                <lable onclick="huanbaoDivClickSet();">确定</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <lable onclick="huanbaoDivClickClose();">取消</lable>
+            </div>
+        </div>
+
+        <!-- ----危化品存储罐子-------- -->
+        <div class="popupTitleGuanziModify" style="display:none;" id="guanziModifyDiv">
+            <div class="popupTitleGuanziModify_head"><i class="left">各公司危化品存储内容修改</i><i class="close right"
+                    onclick="guanziModifyDivClickClose();">x</i>
+            </div>
+            <table style="position: absolute;top: 10%;font-size:14px;">
+                <tr>
+                    <td style="width:10%">储罐</td>
+                    <td style="width:10%">液位高度(%)</td>
+                    <td style="width:10%">温度(℃)</td>
+                    <td style="width:10%">压力(Kpa)</td>
+                    <td style="width:10%">有毒气体(LEL)</td>
+                    <td style="width:10%">储罐</td>
+                    <td style="width:10%">液位高度(%)</td>
+                    <td style="width:10%">温度(℃)</td>
+                    <td style="width:10%">压力(Kpa)</td>
+                    <td style="width:10%">有毒气体(LEL)</td>
+                </tr>
+                <tr>
+                    <td>虹港石化罐1：</td>
+                    <td><input type="text" id="gd11" value="80.44" size="8" /></td>
+                    <td><input type="text" id="wd11" value="23.29" size="8" /></td>
+                    <td><input type="text" id="yl11" value="N/A" size="8" /></td>
+                    <td><input type="text" id="ydqt11" value="0.00" size="8" /></td>
+                    <td>虹港石化罐2：</td>
+                    <td><input type="text" id="gd12" value="80.26" size="8" /></td>
+                    <td><input type="text" id="wd12" value="23.31" size="8" /></td>
+                    <td><input type="text" id="yl12" value="N/A" size="8" /></td>
+                    <td><input type="text" id="ydqt12" value="0.04" size="8" /></td>
+                </tr>
+                <tr>
+                    <td>虹港石化罐3：</td>
+                    <td><input type="text" id="gd13" value="80.21" size="8" /></td>
+                    <td><input type="text" id="wd13" value="23.32" size="8" /></td>
+                    <td><input type="text" id="yl13" value="N/A" size="8" /></td>
+                    <td><input type="text" id="ydqt13" value="0.03" size="8" /></td>
+                    <td>虹港石化罐4：</td>
+                    <td><input type="text" id="gd14" value="80.17" size="8" /></td>
+                    <td><input type="text" id="wd14" value="23.30" size="8" /></td>
+                    <td><input type="text" id="yl14" value="N/A" size="8" /></td>
+                    <td><input type="text" id="ydqt14" value="0.02" size="8" /></td>
+                </tr>
+                <tr>
+                    <td>虹港石化罐5：</td>
+                    <td><input type="text" id="gd15" value="80.12" size="8" /></td>
+                    <td><input type="text" id="wd15" value="23.31" size="8" /></td>
+                    <td><input type="text" id="yl15" value="N/A" size="8" /></td>
+                    <td><input type="text" id="ydqt15" value="0.03" size="8" /></td>
+                    <td>虹港石化罐6：</td>
+                    <td><input type="text" id="gd16" value="80.07" size="8" /></td>
+                    <td><input type="text" id="wd16" value="23.30" size="8" /></td>
+                    <td><input type="text" id="yl16" value="N/A" size="8" /></td>
+                    <td><input type="text" id="ydqt16" value="0.05" size="8" /></td>
+                </tr>
+                <tr>
+                    <td>虹港石化罐7：</td>
+                    <td><input type="text" id="gd17" value="80.06" size="8" /></td>
+                    <td><input type="text" id="wd17" value="23.30" size="8" /></td>
+                    <td><input type="text" id="yl17" value="N/A" size="8" /></td>
+                    <td><input type="text" id="ydqt17" value="0.05" size="8" /></td>
+                    <td>虹港石化罐8：</td>
+                    <td><input type="text" id="gd18" value="80.04" size="8" /></td>
+                    <td><input type="text" id="wd18" value="23.32" size="8" /></td>
+                    <td><input type="text" id="yl18" value="N/A" size="8" /></td>
+                    <td><input type="text" id="ydqt18" value="0.03" size="8" /></td>
+                </tr>
+                <tr>
+                    <td>虹港石化罐9：</td>
+                    <td><input type="text" id="gd19" value="80.02" size="8" /></td>
+                    <td><input type="text" id="wd19" value="23.31" size="8" /></td>
+                    <td><input type="text" id="yl19" value="N/A" size="8" /></td>
+                    <td><input type="text" id="ydqt19" value="0.04" size="8" /></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="width:10%">储罐</td>
+                    <td style="width:10%">液位高度(%)</td>
+                    <td style="width:10%">温度(℃)</td>
+                    <td style="width:10%">压力(Kpa)</td>
+                    <td style="width:10%">有毒气体(LEL)</td>
+                    <td style="width:10%">储罐</td>
+                    <td style="width:10%">液位高度(%)</td>
+                    <td style="width:10%">温度(℃)</td>
+                    <td style="width:10%">压力(Kpa)</td>
+                    <td style="width:10%">有毒气体(LEL)</td>
+                </tr>
+                <tr>
+                    <td>斯尔邦石化罐1：</td>
+                    <td><input type="text" id="gd21" value="N/A" size="8" /></td>
+                    <td><input type="text" id="wd21" value="7.65" size="8" /></td>
+                    <td><input type="text" id="yl21" value="101.9" size="8" /></td>
+                    <td><input type="text" id="ydqt21" value="N/A" size="8" /></td>
+                    <td>斯尔邦石化罐2：</td>
+                    <td><input type="text" id="gd22" value="N/A" size="8" /></td>
+                    <td><input type="text" id="wd22" value="21.34" size="8" /></td>
+                    <td><input type="text" id="yl22" value="102.63" size="8" /></td>
+                    <td><input type="text" id="ydqt22" value="N/A" size="8" /></td>
+                </tr>
+                <tr>
+                    <td>斯尔邦石化罐3：</td>
+                    <td><input type="text" id="gd23" value="N/A" size="8" /></td>
+                    <td><input type="text" id="wd23" value="9.15" size="8" /></td>
+                    <td><input type="text" id="yl23" value="102.33" size="8" /></td>
+                    <td><input type="text" id="ydqt23" value="N/A" size="8" /></td>
+                    <td>斯尔邦石化罐4：</td>
+                    <td><input type="text" id="gd24" value="N/A" size="8" /></td>
+                    <td><input type="text" id="wd24" value="7.64" size="8" /></td>
+                    <td><input type="text" id="yl24" value="101.86" size="8" /></td>
+                    <td><input type="text" id="ydqt24" value="N/A" size="8" /></td>
+                </tr>
+                <tr>
+                    <td>斯尔邦石化罐5：</td>
+                    <td><input type="text" id="gd25" value="N/A" size="8" /></td>
+                    <td><input type="text" id="wd25" value="-31.44" size="8" /></td>
+                    <td><input type="text" id="yl25" value="1.75M" size="8" /></td>
+                    <td><input type="text" id="ydqt25" value="N/A" size="8" /></td>
+                    <td>斯尔邦石化罐6：</td>
+                    <td><input type="text" id="gd26" value="N/A" size="8" /></td>
+                    <td><input type="text" id="wd26" value="-31.38" size="8" /></td>
+                    <td><input type="text" id="yl26" value="1.77M" size="8" /></td>
+                    <td><input type="text" id="ydqt26" value="N/A" size="8" /></td>
+                </tr>
+                <tr>
+                    <td>斯尔邦石化罐7：</td>
+                    <td><input type="text" id="gd27" value="N/A" size="8" /></td>
+                    <td><input type="text" id="wd27" value="-31.48" size="8" /></td>
+                    <td><input type="text" id="yl27" value="1.76M" size="8" /></td>
+                    <td><input type="text" id="ydqt27" value="N/A" size="8" /></td>
+                    <td>斯尔邦石化罐8：</td>
+                    <td><input type="text" id="gd28" value="N/A" size="8" /></td>
+                    <td><input type="text" id="wd28" value="-31.43" size="8" /></td>
+                    <td><input type="text" id="yl28" value="1.77M" size="8" /></td>
+                    <td><input type="text" id="ydqt28" value="N/A" size="8" /></td>
+                </tr>
+                <tr>
+                    <td>斯尔邦石化罐9：</td>
+                    <td><input type="text" id="gd29" value="N/A" size="8" /></td>
+                    <td><input type="text" id="wd29" value="-31.41" size="8" /></td>
+                    <td><input type="text" id="yl29" value="1.75M" size="8" /></td>
+                    <td><input type="text" id="ydqt29" value="N/A" size="8" /></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="width:10%">储罐</td>
+                    <td style="width:10%">液位高度(%)</td>
+                    <td style="width:10%">温度(℃)</td>
+                    <td style="width:10%">压力(Kpa)</td>
+                    <td style="width:10%">有毒气体(LEL)</td>
+                    <td style="width:10%">储罐</td>
+                    <td style="width:10%">液位高度(%)</td>
+                    <td style="width:10%">温度(℃)</td>
+                    <td style="width:10%">压力(Kpa)</td>
+                    <td style="width:10%">有毒气体(LEL)</td>
+                </tr>
+                <tr>
+                    <td>荣泰仓储罐1：</td>
+                    <td><input type="text" id="gd31" value="N/A" size="8" /></td>
+                    <td><input type="text" id="wd31" value="8.15" size="8" /></td>
+                    <td><input type="text" id="yl31" value="44.90" size="8" /></td>
+                    <td><input type="text" id="ydqt31" value="N/A" size="8" /></td>
+                    <td>荣泰仓储罐2：</td>
+                    <td><input type="text" id="gd32" value="N/A" size="8" /></td>
+                    <td><input type="text" id="wd32" value="8.68" size="8" /></td>
+                    <td><input type="text" id="yl32" value="87.50" size="8" /></td>
+                    <td><input type="text" id="ydqt32" value="N/A" size="8" /></td>
+                </tr>
+                <tr>
+                    <td>荣泰仓储罐3：</td>
+                    <td><input type="text" id="gd33" value="N/A" size="8" /></td>
+                    <td><input type="text" id="wd33" value="7.58" size="8" /></td>
+                    <td><input type="text" id="yl33" value="2.70" size="8" /></td>
+                    <td><input type="text" id="ydqt33" value="N/A" size="8" /></td>
+                    <td>荣泰仓储罐4：</td>
+                    <td><input type="text" id="gd34" value="N/A" size="8" /></td>
+                    <td><input type="text" id="wd34" value="8.45" size="8" /></td>
+                    <td><input type="text" id="yl34" value="4.20" size="8" /></td>
+                    <td><input type="text" id="ydqt34" value="N/A" size="8" /></td>
+                </tr>
+                <tr>
+                    <td>荣泰仓储罐5：</td>
+                    <td><input type="text" id="gd35" value="N/A" size="8" /></td>
+                    <td><input type="text" id="wd35" value="7.44" size="8" /></td>
+                    <td><input type="text" id="yl35" value="73.20" size="8" /></td>
+                    <td><input type="text" id="ydqt35" value="N/A" size="8" /></td>
+                    <td>荣泰仓储罐6：</td>
+                    <td><input type="text" id="gd36" value="N/A" size="8" /></td>
+                    <td><input type="text" id="wd36" value="327.67" size="8" /></td>
+                    <td><input type="text" id="yl36" value="1.00" size="8" /></td>
+                    <td><input type="text" id="ydqt36" value="N/A" size="8" /></td>
+                </tr>
+                <tr>
+                    <td>荣泰仓储罐7：</td>
+                    <td><input type="text" id="gd37" value="N/A" size="8" /></td>
+                    <td><input type="text" id="wd37" value="7.74" size="8" /></td>
+                    <td><input type="text" id="yl37" value="56.40" size="8" /></td>
+                    <td><input type="text" id="ydqt37" value="3.32" size="8" /></td>
+                    <td>荣泰仓储罐8：</td>
+                    <td><input type="text" id="gd38" value="N/A" size="8" /></td>
+                    <td><input type="text" id="wd38" value="9.18" size="8" /></td>
+                    <td><input type="text" id="yl38" value="58.30" size="8" /></td>
+                    <td><input type="text" id="ydqt38" value="3.22" size="8" /></td>
+                </tr>
+                <tr>
+                    <td>荣泰仓储罐9：</td>
+                    <td><input type="text" id="gd39" value="N/A" size="8" /></td>
+                    <td><input type="text" id="wd39" value="10.81" size="8" /></td>
+                    <td><input type="text" id="yl39" value="1.24" size="8" /></td>
+                    <td><input type="text" id="ydqt39" value="3.37" size="8" /></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+            </table>
+            <br>
+            <div style="position: absolute;top: 80%;left: 39%;font-size: 40px;">
+                <lable onclick="chuguanSet();">确定</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <lable onclick="guanziModifyDivClickClose();">取消</lable>
+            </div>
+        </div>
+        <!-- 交易系统 -->
+        <div class="sysTemPopup" style="display:none" id="sysTemDiv" onClick="sysTemDivClickClose();">
+            <lable style="position: absolute;top: 2%;left: 2%;font-size: 20px;">交易系统架构展示：</lable>
+            <div class="sysTemPopupFunJiaoyiNew">
+                <div style="position: absolute;top: 23%;left: 12%;"><img src="./static/img/icon-23.png"
+                        width="70%" /></div>
+                <lable style="position: absolute;top: 25%;left: 37%;width: 59%;font-size: 20px;">交易系统</lable>
+            </div>
+            <div class="jiaoyixianBule"></div>
+            <div class="jiaoyixianBule1"></div>
+            <div class="jiaoyixianBule2"></div>
+            <div class="jiaoyixianBule3"></div>
+            <div class="sysTemPopupFunJiaoyi1">
+                <lable style="position: absolute;top: 32%;left: 30%;font-size: 16px;">建材交易平台</lable>
+            </div>
+            <div class="sysTemPopupFunJiaoyi2">
+                <lable style="position: absolute;top: 32%;left: 30%;font-size: 16px;">石化交易平台</lable>
+            </div>
+            <div class="jiaoyixianBule4"></div>
+            <div class="jiaoyixianBule5"></div>
+            <div class="jiaoyixianBule6"></div>
+            <div class="jiaoyixianBule7"></div>
+            <div class="jiaoyixianBule8"></div>
+            <div class="sysTemPopupFunJiaoyi3">
+                <lable style="position: absolute;top: 11%;left: 34%;font-size: 16px;width: 30%;">建材交易业务模块</lable>
+            </div>
+            <div class="sysTemPopupFunJiaoyi4">
+                <lable style="position: absolute;top: 11%;left: 34%;font-size: 16px;width: 30%;">车辆租赁业务模块</lable>
+            </div>
+            <div class="sysTemPopupFunJiaoyi5">
+                <lable style="position: absolute;top: 11%;left: 34%;font-size: 16px;width: 30%;">工程机械设备租赁</lable>
+            </div>
+        </div>
+        <!-- 物流体系 -->
+        <div class="sysTemPopup" style="display:none" id="wuLiuDiv" onClick="wuLiuDivClickClose();">
+            <lable style="position: absolute;top: 2%;left: 2%;font-size: 20px;">物流体系架构展示：</lable>
+            <div class="sysTemPopupFunwuliu1">
+                <div style="position: absolute;top: 30%;left: 18%;"><img src="./static/img/icon-25.png"
+                        width="75%" /></div>
+                <lable style="position: absolute;top: 25%;left: 45%;font-size: 20px;">物流体系</lable>
+            </div>
+            <div class="wuliuBule"></div>
+            <div class="wuliuBule1"></div>
+            <div class="wuliuBule2"></div>
+            <div class="wuliuBule3"></div>
+            <div class="wuliuBule4"></div>
+            <div class="wuliuBule5"></div>
+            <div class="sysTemPopupFunwuliu2">
+                <lable style="position: absolute;top: 11%;left: 34%;font-size: 16px;width: 30%;">物流企业信息管理</lable>
+            </div>
+            <div class="sysTemPopupFunwuliu3">
+                <lable style="position: absolute;top: 11%;left: 34%;font-size: 16px;width: 30%;">询盘报价</lable>
+            </div>
+            <div class="sysTemPopupFunwuliu4">
+                <lable style="position: absolute;top: 11%;left: 34%;font-size: 16px;width: 30%;">车辆管理</lable>
+            </div>
+            <div class="sysTemPopupFunwuliu5">
+                <lable style="position: absolute;top: 11%;left: 34%;font-size: 16px;width: 30%;">物流可视化管理</lable>
+            </div>
+            <div class="sysTemPopupFunwuliu6">
+                <lable style="position: absolute;top: 11%;left: 34%;font-size: 16px;width: 30%;">运单管理</lable>
+            </div>
+        </div>
+
+        <!--仓储系统-->
+        <div class="sysTemPopup" style="display:none" id="cangchuDiv" onClick="cangchuDivClickClose();">
+            <lable style="position: absolute;top: 2%;left: 2%;font-size: 20px;">仓储系统架构展示：</lable>
+            <div class="sysTemPopupFunwuliu1">
+                <div style="position: absolute;top: 23%;left: 23%;"><img src="./static/img/icon-27.png"
+                        width="75%" /></div>
+                <lable style="position: absolute;top: 25%;left: 44%;width: 59%;font-size: 20px;">仓储系统</lable>
+            </div>
+            <div class="cangchuBule"></div>
+            <div class="cangchuBule1"></div>
+            <div class="cangchuBule2"></div>
+            <div class="cangchuBule3"></div>
+            <div class="cangchuBule4"></div>
+            <div class="cangchuBule5"></div>
+            <div class="sysTemPopupFuncangchu2">
+                <lable style="position: absolute;top: 10%;left: 34%;font-size: 16px;width: 30%;">仓储企业信息管理</lable>
+            </div>
+            <div class="sysTemPopupFuncangchu3">
+                <lable style="position: absolute;top: 10%;left: 34%;font-size: 16px;width: 30%;">询盘报价</lable>
+            </div>
+            <div class="sysTemPopupFuncangchu4">
+                <lable style="position: absolute;top: 10%;left: 34%;font-size: 16px;width: 30%;">库房管理</lable>
+            </div>
+            <div class="sysTemPopupFuncangchu5">
+                <lable style="position: absolute;top: 10%;left: 34%;font-size: 16px;width: 30%;">仓单管理</lable>
+            </div>
+        </div>
+        <!-- 供应链金融系统 -->
+        <div class="sysTemPopup" style="display:none" id="gongyinglianDiv" onClick="gongyinglianDivClickClose();">
+            <lable style="position: absolute;top: 2%;left: 2%;font-size: 20px;">供应链金融系统架构展示：</lable>
+            <div class="sysTemPopupFunwuliu1">
+                <div style="position: absolute;top: 23%;left: 12%;"><img src="./static/img/icon-24.png"
+                        width="75%" /></div>
+                <lable style="position: absolute;top: 25%;left: 37%;width: 59%;font-size: 20px;">供应链金融系统</lable>
+            </div>
+            <div class="wuliuBule"></div>
+            <div class="wuliuBule1"></div>
+            <div class="wuliuBule2"></div>
+            <div class="wuliuBule3"></div>
+            <div class="wuliuBule4"></div>
+            <div class="wuliuBule5"></div>
+            <div class="sysTemPopupFunwuliu2">
+                <lable style="position: absolute;top: 27%;left: 34%;font-size: 16px;width: 30%;">融资咨询</lable>
+            </div>
+            <div class="sysTemPopupFunwuliu3">
+                <lable style="position: absolute;top: 27%;left: 34%;font-size: 16px;width: 30%;">融资报备</lable>
+            </div>
+            <div class="sysTemPopupFunwuliu4">
+                <lable style="position: absolute;top: 27%;left: 34%;font-size: 16px;width: 30%;">资料上传</lable>
+            </div>
+            <div class="sysTemPopupFunwuliu5">
+                <lable style="position: absolute;top: 27%;left: 34%;font-size: 16px;width: 30%;">仓单质押</lable>
+            </div>
+            <div class="sysTemPopupFunwuliu6">
+                <lable style="position: absolute;top: 27%;left: 34%;font-size: 16px;width: 30%;">票券贴现</lable>
+            </div>
+        </div>
+        <!--支撑服务体系-->
+        <div class="sysTemPopup" style="display:none" id="zhichengDiv" onClick="zhichengDivClickClose();">
+            <lable style="position: absolute;top: 2%;left: 2%;font-size: 20px;">支撑服务体系架构展示：</lable>
+            <div class="sysTemPopupFunwuliu1">
+                <div style="position: absolute;top: 21%;left: 15%;"><img src="./static/img/icon-26.png"
+                        width="70%" /></div>
+                <lable style="position: absolute;top: 25%;left: 37%;width: 59%;font-size: 20px;">支撑服务体系</lable>
+            </div>
+            <div class="zhichengBule"></div>
+            <div class="zhichengBule1"></div>
+            <div class="zhichengBule2"></div>
+            <div class="zhichengBule4"></div>
+            <div class="sysTemPopupFunzhicheng2">
+                <lable style="position: absolute;top: 10%;left: 34%;font-size: 16px;width: 30%;">客户关系系统</lable>
+            </div>
+            <div class="sysTemPopupFunzhicheng3">
+                <lable style="position: absolute;top: 10%;left: 34%;font-size: 16px;width: 30%;">E<br>R<br>P<br>系统
+                </lable>
+            </div>
+            <div class="sysTemPopupFunzhicheng5">
+                <lable style="position: absolute;top: 10%;left: 34%;font-size: 16px;width: 30%;">财务系统</lable>
+            </div>
+        </div>
+
+        <!--政务服务管理系统-->
+        <div class="zhengwusysTemPopup" style="display:none" id="zhengwufuwDiv" onClick="zhengwufuwDivClickClose();">
+            <lable style="position: absolute;top: 2%;left: 2%;font-size: 20px;">政务服务管理系统展示：</lable>
+            <div class="sysTemPopupFunwuliu1">
+                <div style="position: absolute;top: 30%;left:10%;"><img src="./static/img/icon-28.png"
+                        width="75%" /></div>
+                <lable style="position: absolute;top: 25%;left: 27%;width: 70%;font-size: 20px;">政务服务管理系统</lable>
+            </div>
+            <div class="cangchuBule"></div>
+            <div class="cangchuBule1"></div>
+            <div class="cangchuBule2"></div>
+            <div class="cangchuBule3"></div>
+            <div class="cangchuBule4"></div>
+            <div class="cangchuBule5"></div>
+            <div class="sysTemPopupFuncangchu2">
+                <lable style="position: absolute;top: 10%;left: 34%;font-size: 16px;width: 30%;">收发文管理</lable>
+            </div>
+            <div class="sysTemPopupFuncangchu3">
+                <lable style="position: absolute;top: 10%;left: 34%;font-size: 16px;width: 30%;">招投标管理</lable>
+            </div>
+            <div class="sysTemPopupFuncangchu4">
+                <lable style="position: absolute;top: 10%;left: 34%;font-size: 16px;width: 30%;">目标考核管理</lable>
+            </div>
+            <div class="sysTemPopupFuncangchu5">
+                <lable style="position: absolute;top: 10%;left: 34%;font-size: 16px;width: 30%;">融资财务管理</lable>
+            </div>
+        </div>
+        <!--经济运行监测系统-->
+        <div class="zhengwusysTemPopup" style="display:none" id="jingjiyunxDiv" onClick="jingjiyunxDivClickClose();">
+            <lable style="position: absolute;top: 2%;left: 2%;font-size: 20px;">经济运行监测系统架构展示：</lable>
+            <div class="sysTemPopupFunwuliu1">
+                <div style="position: absolute;top: 27%;left: 10%;"><img src="./static/img/icon-31.png"
+                        width="75%" /></div>
+                <lable style="position: absolute;top: 25%;left: 27%;width: 70%;font-size: 20px;">经济运行监测系统</lable>
+            </div>
+            <div class="zhichengBule"></div>
+            <div class="zhichengBule1"></div>
+            <div class="zhichengBule2"></div>
+            <div class="zhichengBule4"></div>
+            <div class="sysTemPopupFunzhicheng2">
+                <lable style="position: absolute;top: 10%;left: 34%;font-size: 16px;width: 30%;">生产总值预测</lable>
+            </div>
+            <div class="sysTemPopupFunzhicheng3">
+                <lable style="position: absolute;top: 10%;left: 34%;font-size: 16px;width: 30%;">经济运行情况分析</lable>
+            </div>
+            <div class="sysTemPopupFunzhicheng5">
+                <lable style="position: absolute;top: 10%;left: 34%;font-size: 16px;width: 30%;">财税收人预测</lable>
+            </div>
+        </div>
+        <div class="ship1Set" style="display:block" id="shipin1">
+        </div>
+        <div class="ship2Set" style="display:block" id="shipin2">
+        </div>
+        <div class="ship3Set" style="display:block" id="shipin3">
+        </div>
+        <!--    <div class="ship4Set" style="display:block" id="shipin4" onClick="videoSetFunction(4);">-->
+        <!--    </div>-->
+    </div>
+
+    <script type="text/javascript">
+        var map, layerDay, layerNight, heatMapLayer, bt = false;
+        var map, markers, vector;
+        var url = "${session_url}";
+        var url1 = "${hypergraph_url}";
+        var url2 = "${hypergraph_url2}";
+    </script>
+    <script type="text/javascript" src="./static/js/utils/environment.js"></script>
+</body>
+
+</html>

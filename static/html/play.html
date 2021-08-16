@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>实时监控</title>
+</head>
+<style>
+    html,
+    body {
+        padding: 0;
+        margin: 0;
+        position: relative;
+        background: #000;
+    }
+
+    .playWnd {
+        width: 1000px;
+        /*播放容器的宽和高设定*/
+        height: 600px;
+        border: 1px solid #000;
+    }
+
+    .playWnd img {
+        display: none !important;
+    }
+
+    .dialog {
+        position: absolute;
+        top: 28%;
+        left: 50%;
+        transform: translate(-50%);
+        display: none;
+        background: linear-gradient(90deg, rgba(3, 83, 165, 0.72) 0%, rgba(3, 56, 117, 0.93) 61%, rgba(3, 53, 110, 0.96) 100%);
+    }
+
+    .dialog .p-header {
+        height: 50px;
+        padding: 0 30px;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        border-bottom: solid 0.05vw #34a1ff;
+    }
+
+    .dialog .p-header .icon {
+        width: 28px;
+        height: 23px;
+        background: url("../img/tips.png") center center no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .dialog .p-header .close {
+        width: 20px;
+        height: 20px;
+        background: url("../img/s-close.png") center center no-repeat;
+        background-size: 100% 100%;
+        cursor: pointer;
+    }
+
+    .dialog .p-header .text {
+        flex: 1;
+        color: #03f2fb;
+        text-indent: 20px;
+    }
+
+    .dialog .common-cont {
+        color: #fff;
+        height: calc(100% - 75px);
+        display: flex;
+        padding: 20px;
+        flex-direction: column;
+        justify-content: space-around;
+        box-sizing: border-box;
+    }
+
+    .dialog .common-footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 80px;
+    }
+
+    .dialog .common-footer .button {
+        width: 140px;
+        color: #ffffff;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        display: block;
+        border: none;
+        font-size: 20px;
+        margin: 0 auto;
+        background: url("../img/buttonStyle.png") center center no-repeat;
+        background-size: 100% 100%;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <img src='./img/PreloaderDark.gif' width='44px' height='48px' alt='Preloader'
+        style='position:absolute; top:50%; left:50%; margin-top:-22px; margin-left:-24px;'>
+    <div id="playWnd" class="playWnd"></div>
+    <div id="download" class="dialog">
+        <div class="p-header">
+            <span class="icon"></span>
+            <span class="text">提示</span>
+            <span class="close"></span>
+        </div>
+        <div class="common-cont">
+            您未安装实时监控插件，请点击下方按钮进行下载安装，安装成功后请刷新页面重新操作！
+        </div>
+        <div class="common-footer" id="common-footer">
+            <div class="button">下载插件</div>
+        </div>
+    </div>
+</body>
+
+<!--三个必要的js文件引入-->
+<script src="./js/jquery-1.12.4.min.js"></script>
+<script src="./js/jsencrypt.min.js"></script>
+<!-- 用于RSA加密 -->
+<script src="./js/jsWebControl-1.0.0.min.js"></script>
+<!-- 用于前端与插件交互 -->
+
+<script type="text/javascript">
+    //页面加载时创建播放实例初始化
+    $(window).load(function () {
+        initPlugin();
+        $(".button").bind("click", () => {
+            // window.open("/hbBigScreem/static/html/files/VideoWebPlugin.exe")
+            var a = document.createElement("a");
+            a.setAttribute("href", '/hbBigScreem/static/html/files/VideoWebPlugin.exe');
+            // a.setAttribute("target", "_blank");
+            a.setAttribute("id", "camnpr");
+            document.body.appendChild(a);
+            a.click();
+        })
+        $("#download .close").bind("click", () => {
+            $("#download").hide();
+        })
+    });
+
+    //声明公用变量
+    var initCount = 0;
+    var pubKey = '';
+    var cameraIndexCodes = [];
+
+    function getQueryVariable() {
+        var s = window.location.href.toString();
+        var d = s.indexOf('?');
+        if (d == -1) return false;
+        var args = s.substring(d + 1, s.length);
+        cameraIndexCodes = args.split(";");
+
+        if (cameraIndexCodes.length == 0) return false;
+        return true;
+    }
+
+    // 创建播放实例
+    function initPlugin() {
+        var r = getQueryVariable();
+        if (r === false) {
+            $("#playWnd").html("创建WebControl实例失败");
+            return false;
+        }
+        oWebControl = new WebControl({
+            szPluginContainer: "playWnd", // 指定容器id
+            iServicePortStart: 15900, // 指定起止端口号，建议使用该值
+            iServicePortEnd: 15909,
+            szClassId: "23BF3B0A-2C56-4D97-9C03-0CB103AA8F11", // 用于IE10使用ActiveX的clsid
+            cbConnectSuccess: function () { // 创建WebControl实例成功											
+                oWebControl.JS_StartService("window", { // WebControl实例创建成功后需要启动服务
+                    dllPath: "./VideoPluginConnect.dll" // 值"./VideoPluginConnect.dll"写死 
+                }).then(function () { // 启动插件服务成功
+                    oWebControl.JS_SetWindowControlCallback({ // 设置消息回调
+                        cbIntegrationCallBack: cbIntegrationCallBack
+                    });
+
+                    oWebControl.JS_CreateWnd("playWnd", 820, 600).then(function () { //JS_CreateWnd创建视频播放窗口，宽高可设定
+                        init(); // 创建播放实例成功后初始化
+                    });
+                }, function () { // 启动插件服务失败
+                });
+            },
+            cbConnectError: function () { // 创建WebControl实例失败
+                oWebControl = null;
+                // $("#playWnd").html("插件未启动，正在尝试启动，请稍候...");
+                $("#download").show();
+                WebControl.JS_WakeUp("VideoWebPlugin://"); // 程序未启动时执行error函数，采用wakeup来启动程序
+                initCount++;
+                if (initCount < 3) {
+                    setTimeout(function () {
+                        initPlugin();
+                    }, 3000)
+                } else {
+                    $("#playWnd").html("插件启动失败，请检查插件是否安装！");
+                }
+            },
+            cbConnectClose: function (bNormalClose) {
+                // 异常断开：bNormalClose = false
+                // JS_Disconnect正常断开：bNormalClose = true	
+                console.log("cbConnectClose");
+                oWebControl = null;
+            }
+        });
+    }
+
+    // 设置窗口控制回调
+    function setCallbacks() {
+        oWebControl.JS_SetWindowControlCallback({
+            cbIntegrationCallBack: cbIntegrationCallBack
+        });
+    }
+
+    // 推送消息
+    function cbIntegrationCallBack(oData) {
+        showCBInfo(JSON.stringify(oData.responseMsg));
+    }
+
+    //初始化
+    function init() {
+        getPubKey(function () {
+
+            ////////////////////////////////// 请自行修改以下变量值	////////////////////////////////////		
+            var appkey = "27274451"; //综合安防管理平台提供的appkey，必填
+            var secret = setEncrypt("kE3XKfxy1e3L4NV1M83c"); //综合安防管理平台提供的secret，必填
+            var ip = "172.16.10.2"; //综合安防管理平台IP地址，必填
+            var playMode = 0; //初始播放模式：0-预览，1-回放
+            var port = 443; //综合安防管理平台端口，若启用HTTPS协议，默认443
+            var snapDir = "D:\\SnapDir"; //抓图存储路径
+            var videoDir = "D:\\VideoDir"; //紧急录像或录像剪辑存储路径
+            var layout = getLayOut(); //playMode指定模式的布局
+            var enableHTTPS = 1; //是否启用HTTPS协议与综合安防管理平台交互，这里总是填1
+            var encryptedFields = 'secret'; //加密字段，默认加密领域为secret
+            var showToolbar = 1; //是否显示工具栏，0-不显示，非0-显示
+            var showSmart = 1; //是否显示智能信息（如配置移动侦测后画面上的线框），0-不显示，非0-显示
+            var buttonIDs = "0,16,256,257,258,259,260,512,513,514,515,516,517,768,769"; //自定义工具条按钮
+            ////////////////////////////////// 请自行修改以上变量值	////////////////////////////////////
+
+            oWebControl.JS_RequestInterface({
+                funcName: "init",
+                argument: JSON.stringify({
+                    appkey: appkey, //API网关提供的appkey
+                    secret: secret, //API网关提供的secret
+                    ip: ip, //API网关IP地址
+                    playMode: playMode, //播放模式（决定显示预览还是回放界面）
+                    port: port, //端口
+                    snapDir: snapDir, //抓图存储路径
+                    videoDir: videoDir, //紧急录像或录像剪辑存储路径
+                    layout: layout, //布局
+                    enableHTTPS: enableHTTPS, //是否启用HTTPS协议
+                    encryptedFields: encryptedFields, //加密字段
+                    showToolbar: showToolbar, //是否显示工具栏
+                    showSmart: showSmart, //是否显示智能信息
+                    buttonIDs: buttonIDs //自定义工具条按钮
+                })
+            }).then(function (oData) {
+                oWebControl.JS_Resize(820, 600); // 初始化后resize一次，规避firefox下首次显示窗口后插件窗口未与DIV窗口重合问题
+
+                setTimeout(play, 1000);
+                if (oWebControl != null) {
+                    setTimeout(() => {
+                        var width = document.body.clientWidth;
+                        var height = document.body.clientHeight;
+
+                        oWebControl.JS_Resize(width, height);
+                        setWndCover();
+                    }, 1000)
+
+                }
+            });
+        });
+    }
+
+    function getLayOut() {
+        var total = cameraIndexCodes.length;
+
+        console.log(cameraIndexCodes)
+        var layout = "";
+        if (total < 3) {
+            layout = "1x" + total;
+        } else if (total == 3) {
+            layout = "1+2";
+        } else if (total == 4) {
+            layout = "2x2";
+        } else if (total == 5) {
+            layout = "1+5";
+        } else if (total == 6) {
+            layout = "1+5";
+        } else if (total == 7) {
+            layout = "3+4";
+        } else if (total == 8) {
+            layout = "1+8";
+        } else if (total == 9) {
+            layout = "3x3";
+        } else if (total == 10) {
+            layout = "1+9";
+        } else if (total < 17) {
+            layout = "4x4";
+        } else {
+            layout = "5x5";
+        }
+        return layout;
+    }
+
+    //获取公钥
+    function getPubKey(callback) {
+        oWebControl.JS_RequestInterface({
+            funcName: "getRSAPubKey",
+            argument: JSON.stringify({
+                keyLength: 1024
+            })
+        }).then(function (oData) {
+            console.log(oData);
+            if (oData.responseMsg.data) {
+                pubKey = oData.responseMsg.data;
+                callback()
+            }
+        })
+    }
+
+    //RSA加密
+    function setEncrypt(value) {
+        var encrypt = new JSEncrypt();
+        encrypt.setPublicKey(pubKey);
+        return encrypt.encrypt(value);
+    }
+
+    // 监听resize事件，使插件窗口尺寸跟随DIV窗口变化
+    $(window).resize(function () {
+        if (oWebControl != null) {
+            oWebControl.JS_Resize(1000, 600);
+            setWndCover();
+        }
+    });
+
+    // 监听滚动条scroll事件，使插件窗口跟随浏览器滚动而移动
+    $(window).scroll(function () {
+        if (oWebControl != null) {
+            oWebControl.JS_Resize(1000, 600);
+            setWndCover();
+        }
+    });
+
+
+    // 设置窗口裁剪，当因滚动条滚动导致窗口需要被遮住的情况下需要JS_CuttingPartWindow部分窗口
+    function setWndCover() {
+        var iWidth = $(window).width();
+        var iHeight = $(window).height();
+        var oDivRect = $("#playWnd").get(0).getBoundingClientRect();
+
+        var iCoverLeft = (oDivRect.left < 0) ? Math.abs(oDivRect.left) : 0;
+        var iCoverTop = (oDivRect.top < 0) ? Math.abs(oDivRect.top) : 0;
+        var iCoverRight = (oDivRect.right - iWidth > 0) ? Math.round(oDivRect.right - iWidth) : 0;
+        var iCoverBottom = (oDivRect.bottom - iHeight > 0) ? Math.round(oDivRect.bottom - iHeight) : 0;
+
+        iCoverLeft = (iCoverLeft > 1200) ? 1000 : iCoverLeft;
+        iCoverTop = (iCoverTop > 600) ? 600 : iCoverTop;
+        iCoverRight = (iCoverRight > 1000) ? 1000 : iCoverRight;
+        iCoverBottom = (iCoverBottom > 600) ? 600 : iCoverBottom;
+
+        oWebControl.JS_RepairPartWindow(0, 0, 1001, 600); // 多1个像素点防止还原后边界缺失一个像素条
+        if (iCoverLeft != 0) {
+            oWebControl.JS_CuttingPartWindow(0, 0, iCoverLeft, 600);
+        }
+        if (iCoverTop != 0) {
+            oWebControl.JS_CuttingPartWindow(0, 0, 1001, iCoverTop); // 多剪掉一个像素条，防止出现剪掉一部分窗口后出现一个像素条
+        }
+        if (iCoverRight != 0) {
+            oWebControl.JS_CuttingPartWindow(1000 - iCoverRight, 0, iCoverRight, 600);
+        }
+        if (iCoverBottom != 0) {
+            oWebControl.JS_CuttingPartWindow(0, 600 - iCoverBottom, 1000, iCoverBottom);
+        }
+    }
+
+    //视频预览功能
+    $("#startPreview").click(function () {
+
+        oWebControl.JS_RequestInterface({
+            funcName: "startMultiPreviewByCameraIndexCode",
+            argument: JSON.stringify({
+                list: [{
+                    "authUuid": "1",
+                    "cameraIndexCode": "92033f10187d4912b7b98e6faf51081a",
+                    "ezvizDirect": 0,
+                    "gpuMode": 0,
+                    "streamMode": 0,
+                    "transMode": 1,
+                    "wndId": 1
+                }, {
+                    "authUuid": "2",
+                    "cameraIndexCode": "26e3585383c6410388fe5fe021d0097a",
+                    "ezvizDirect": 0,
+                    "gpuMode": 0,
+                    "streamMode": 0,
+                    "transMode": 1,
+                    "wndId": 2
+                }, {
+                    "authUuid": "4",
+                    "cameraIndexCode": "26e3585383c6410388fe5fe021d0097a",
+                    "ezvizDirect": 0,
+                    "gpuMode": 0,
+                    "streamMode": 0,
+                    "transMode": 1,
+                    "wndId": 4
+                }
+
+                ]
+            })
+        })
+
+
+    });
+
+    //停止全部预览
+    $("#stopAllPreview").click(function () {
+        oWebControl.JS_RequestInterface({
+            funcName: "stopAllPreview"
+        });
+    });
+
+
+    function play() {
+        var lists = [];
+        $.each(cameraIndexCodes, function (i, cameraIndexCode) {
+            var arr = {
+                "authUuid": Math.ceil(Math.random() * 1000),
+                "cameraIndexCode": cameraIndexCode,
+                "ezvizDirect": 0,
+                "gpuMode": 0,
+                "streamMode": 0,
+                "transMode": 1,
+                "wndId": i + 1
+            };
+            lists.push(arr);
+        })
+
+
+        oWebControl.JS_RequestInterface({
+            funcName: "startMultiPreviewByCameraIndexCode",
+            argument: JSON.stringify({
+                list: lists
+            })
+        });
+
+    }
+
+    // 标签关闭
+    $(window).unload(function () {
+        if (oWebControl != null) {
+            oWebControl.JS_HideWnd(); // 先让窗口隐藏，规避可能的插件窗口滞后于浏览器消失问题 
+            oWebControl.JS_Disconnect().then(function () { // 断开与插件服务连接成功
+            },
+                function () { // 断开与插件服务连接失败
+                });
+        }
+    });
+</script>
+
+</html>
